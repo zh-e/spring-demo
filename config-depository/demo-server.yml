@@ -4,8 +4,13 @@ server:
 spring:
   application:
     name: demo-server
+  cloud:
+    consul:
+      host: 192.144.226.81
+      port: 8888
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:8888/eureka/
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:8888/eureka/
+
