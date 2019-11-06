@@ -1,13 +1,26 @@
 server:
   port: 8889
 
+#本地文件
+#spring:
+#  application:
+#    name: config-server
+#  cloud:
+#    config:
+#      server:
+#        native:
+#          search-locations: classpath:/shared
+#  profiles:
+#    active: native
+
+#git文件
 spring:
   application:
     name: config-server
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/shared
-  profiles:
-    active: native
+        git:
+          uri: https://github.com/zh-e/spring-study
+          search-paths: config-depository
+      label: master
