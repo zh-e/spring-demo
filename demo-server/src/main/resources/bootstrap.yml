@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: demo-server
+  cloud:
+    config:
+      uri: http://127.0.0.1:8889
+      fail-fast: true
