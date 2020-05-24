@@ -15,6 +15,9 @@
         <module>demo-server-interface</module>
         <module>demo-client</module>
         <module>config-server</module>
+        <module>dubbo-demo-server</module>
+        <module>dubbo-demo-interface</module>
+        <module>dubbo-demo-client</module>
     </modules>
 
     <properties>
