@@ -18,6 +18,7 @@
         <module>dubbo-demo-server</module>
         <module>dubbo-demo-interface</module>
         <module>dubbo-demo-client</module>
+        <module>demo-log</module>
     </modules>
 
     <properties>
