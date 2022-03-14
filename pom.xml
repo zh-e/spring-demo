@@ -19,6 +19,8 @@
         <module>dubbo-demo-interface</module>
         <module>dubbo-demo-client</module>
         <module>demo-log</module>
+        <module>i18n-demo</module>
+        <module>i18n-demo-common</module>
     </modules>
 
     <properties>
