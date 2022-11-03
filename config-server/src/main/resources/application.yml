@@ -21,6 +21,6 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/zh-e/spring-study
+          uri: https://github.com/zh-e/spring-demo
           search-paths: config-depository
       label: master
