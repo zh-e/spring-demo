@@ -1,16 +1,12 @@
 package com.zhe.i18n.server.controller;
 
 import com.zhe.i18n.common.HelloUtil;
-import com.zhe.i18n.server.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.Locale;
 
 @RestController
@@ -36,20 +32,5 @@ public class HelloController {
         return helloUtil.get();
     }
 
-    @GetMapping("/test")
-    public String test() {
-
-        Enumeration<URL> urls = null;
-        try {
-            urls = Application.class.getClassLoader().getResources("");
-            while (urls.hasMoreElements()) {
-                URL url = urls.nextElement();
-                System.out.println(url.getPath());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return "";
-    }
 
 }
