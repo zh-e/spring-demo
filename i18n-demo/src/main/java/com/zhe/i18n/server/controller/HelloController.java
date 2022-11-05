@@ -23,13 +23,22 @@ public class HelloController {
         Locale locale = LocaleContextHolder.getLocale();
 
         String msg = messageSource.getMessage("current.local", null, locale);
+        System.out.println("无参数 本项目 msg:" + msg);
 
-        return msg;
-    }
+        msg = messageSource.getMessage("hello.arg", new Object[]{11, 22}, locale);
+        System.out.println("有参数 本项目 msg:" + msg);
 
-    @GetMapping("/hello1")
-    public String hello1() {
-        return helloUtil.get();
+
+        msg = helloUtil.get();
+        System.out.println("有参数 依赖项目 msg:" + msg);
+
+        //todo 子线程获取不到父线程的 LocaleContextHolder
+        new Thread(() -> {
+            Locale locale1 = LocaleContextHolder.getLocale();
+            System.out.println(locale1.getLanguage());
+        }).start();
+
+        return "hello success";
     }
 
 }
