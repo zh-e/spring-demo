@@ -32,10 +32,9 @@ public class HelloController {
         msg = helloUtil.get();
         System.out.println("有参数 依赖项目 msg:" + msg);
 
-        //todo 子线程获取不到父线程的 LocaleContextHolder
         new Thread(() -> {
-            Locale locale1 = LocaleContextHolder.getLocale();
-            System.out.println(locale1.getLanguage());
+            String threadMsg = messageSource.getMessage("hello.arg", new Object[]{"子11", "子22"}, locale);
+            System.out.println("有参数 子线程 msg:" + threadMsg);
         }).start();
 
         return "hello success";
