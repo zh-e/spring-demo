@@ -167,7 +167,7 @@
 
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
-        <logger name="com.zhe.study" level="debug"/>
+        <logger name="com.zhe.demo" level="debug"/>
     </springProfile>
 
     <root level="info">

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zhe.study</groupId>
+    <groupId>com.zhe.demo</groupId>
     <artifactId>spring-demo</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -21,6 +21,7 @@
         <module>demo-log</module>
         <module>i18n-demo</module>
         <module>i18n-common</module>
+        <module>api-base</module>
     </modules>
 
     <properties>
