@@ -29,7 +29,7 @@
 
         <dependency>
             <groupId>com.zhe.study</groupId>
-            <artifactId>i18n-demo-common</artifactId>
+            <artifactId>i18n-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

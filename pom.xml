@@ -20,7 +20,7 @@
         <module>dubbo-demo-client</module>
         <module>demo-log</module>
         <module>i18n-demo</module>
-        <module>i18n-demo-common</module>
+        <module>i18n-common</module>
     </modules>
 
     <properties>
