@@ -1,4 +1,4 @@
-package com.zhe.i18n.config;
+package com.zhe.i18n.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
