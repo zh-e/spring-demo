@@ -11,6 +11,8 @@
     <springProperty scope="context" name="LOG_PATH" source="log.path" defaultValue="/opt/log"/>
     <property name="DEFAULT_PATTERN"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %X{traceId} %-5level %logger{50}:%line - %msg%n"/>
+    <!--异步写日志的队列大小配置，默认为256-->
+    <property name="ASYNC_QUEUE_SIZE" value="1024"/>
 
     <!--输出到控制台-->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
@@ -65,6 +67,26 @@
         </filter>
     </appender>
 
+    <!-- 异步默认日志文件的配置 -->
+    <appender name="ASYNC_DEFAULT_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>${ASYNC_QUEUE_SIZE}</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="DEFAULT_FILE"/>
+    </appender>
+
+    <!-- 异步错误日志文件的配置 -->
+    <appender name="ASYNC_ERROR_FILE" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>${ASYNC_QUEUE_SIZE}</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="ERROR_FILE"/>
+    </appender>
+
     <!--
         <logger>用来设置某一个包或者具体的某一个类的日志打印级别、
         以及指定<appender>。<logger>仅有一个name属性，
@@ -93,8 +115,8 @@
 
     <springProfile name="!local">
         <root level="INFO">
-            <appender-ref ref="DEFAULT_FILE"/>
-            <appender-ref ref="ERROR_FILE"/>
+            <appender-ref ref="ASYNC_DEFAULT_FILE"/>
+            <appender-ref ref="ASYNC_ERROR_FILE"/>
         </root>
     </springProfile>
 
