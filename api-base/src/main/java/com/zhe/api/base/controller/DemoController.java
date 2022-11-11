@@ -15,6 +15,12 @@ public class DemoController {
 
     @GetMapping("/get1")
     public BaseResponse<String> get1() {
+        LOGGER.info("get1");
+
+        new Thread(() -> {
+            LOGGER.info("thread");
+        }).start();
+
         return new BaseResponse<>(RespCodeEnum.SUCCESS, "get1 success");
     }
 
