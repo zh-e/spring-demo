@@ -7,6 +7,8 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.params.SetParams;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.concurrent.Callable;
 
 @Service
 public class RedisService {
@@ -26,5 +28,28 @@ public class RedisService {
         }
     }
 
+    public void withLockExec(String key, int expire, int acquireTimeout, Runnable runnable) throws IOException {
+        RedisReentrantLock lock = new RedisReentrantLock(jedisPool, key);
+        if (!lock.lock(expire, acquireTimeout)) {
+            throw new RuntimeException(String.format("key: %s, 未争抢到锁", key));
+        }
+        try {
+            runnable.run();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public <T>T withLockExec(String key, int expire, int acquireTimeout, Callable<T> callable) throws Exception {
+        RedisReentrantLock lock = new RedisReentrantLock(jedisPool, key);
+        if (!lock.lock(expire, acquireTimeout)) {
+            throw new RuntimeException(String.format("key: %s, 未争抢到锁", key));
+        }
+        try {
+            return callable.call();
+        } finally {
+            lock.unlock();
+        }
+    }
 
 }

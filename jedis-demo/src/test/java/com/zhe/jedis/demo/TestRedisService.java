@@ -19,5 +19,13 @@ public class TestRedisService {
         Assertions.assertEquals(res, true);
     }
 
+    @Test
+    public void testLock() throws Exception {
+        redisService.withLockExec("test", 100, 100, () -> {
+            System.out.println("111");
+        });
+
+        redisService.withLockExec("test", 100, 100, () -> "111");
+    }
 
 }
