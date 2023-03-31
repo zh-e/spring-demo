@@ -22,6 +22,7 @@
         <module>i18n-common</module>
         <module>api-base</module>
         <module>jedis-demo</module>
+        <module>mybatis-demo</module>
     </modules>
 
     <properties>
