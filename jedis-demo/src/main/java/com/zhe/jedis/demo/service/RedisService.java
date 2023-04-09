@@ -4,6 +4,7 @@ package com.zhe.jedis.demo.service;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPubSub;
 import redis.clients.jedis.params.SetParams;
 
 import javax.annotation.Resource;
@@ -28,6 +29,24 @@ public class RedisService {
         }
     }
 
+    public boolean setNx(String key, String value, long expire) {
+        try (Jedis jedis = jedisPool.getResource()) {
+            return jedis.set(key, value, SetParams.setParams().nx().ex(expire)) != null;
+        }
+    }
+
+    public void subscribe(JedisPubSub jedisPubSub, String... channels) {
+        try (Jedis jedis = jedisPool.getResource()) {
+            jedis.subscribe(jedisPubSub, channels);
+        }
+    }
+
+    public void publish(String channel, String message) {
+        try (Jedis jedis = jedisPool.getResource()) {
+            jedis.publish(channel, message);
+        }
+    }
+
     public void withLockExec(String key, int expire, int acquireTimeout, Runnable runnable) throws IOException {
         RedisReentrantLock lock = new RedisReentrantLock(jedisPool, key);
         if (!lock.lock(expire, acquireTimeout)) {
@@ -40,7 +59,7 @@ public class RedisService {
         }
     }
 
-    public <T>T withLockExec(String key, int expire, int acquireTimeout, Callable<T> callable) throws Exception {
+    public <T> T withLockExec(String key, int expire, int acquireTimeout, Callable<T> callable) throws Exception {
         RedisReentrantLock lock = new RedisReentrantLock(jedisPool, key);
         if (!lock.lock(expire, acquireTimeout)) {
             throw new RuntimeException(String.format("key: %s, 未争抢到锁", key));
