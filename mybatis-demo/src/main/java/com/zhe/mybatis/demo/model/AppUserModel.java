@@ -54,4 +54,14 @@ public class AppUserModel {
         this.updateTime = updateTime;
     }
 
+    @Override
+    public String toString() {
+        return "AppUserModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

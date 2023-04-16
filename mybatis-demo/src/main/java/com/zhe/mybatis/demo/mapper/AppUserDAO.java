@@ -7,12 +7,21 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 @Mapper
-public interface AppUserMapper {
+public interface AppUserDAO {
 
+    /**
+     * @return
+     */
     List<AppUserModel> findAll();
 
-    @Update("update app_user set sex = 'f' where id = 1")
-    int update();
+    /**
+     * 根据id更新
+     *
+     * @param id id
+     * @return
+     */
+    @Update("update app_user set sex = #{sex} where id = #{id}")
+    int update(Long id, String sex);
 
 
 }
