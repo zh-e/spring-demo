@@ -23,6 +23,7 @@
         <module>api-base</module>
         <module>jedis-demo</module>
         <module>mybatis-demo</module>
+        <module>kafka-demo</module>
     </modules>
 
     <properties>
